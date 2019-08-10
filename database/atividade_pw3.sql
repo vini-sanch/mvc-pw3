@@ -1,9 +1,9 @@
 #Cria o banco de dados
-CREATE DATABASE `JORNAL`;
+CREATE DATABASE `BDNOTICIA`;
 #seleciona o banco
-USE `JORNAL`;
+USE `BDNOTICIA`;
 
-ALTER DATABASE `JORNAL` CHARSET = UTF8 COLLATE = utf8_unicode_ci;
+ALTER DATABASE `BDNOTICIA` CHARSET = UTF8 COLLATE = utf8_unicode_ci;
 
 #cria a tabela Usuário
 CREATE TABLE `USUARIO`(
