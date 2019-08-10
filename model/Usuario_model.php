@@ -34,7 +34,7 @@
         public function cadastrar()
         {
             // string com o comando sql de inserção
-            $sql_cmd = "INSERT INTO `USUARIO` (`NOME`, `EMAIL`, `SENHA`, `NIVEL_ACESSO`)
+            $sql_cmd = "INSERT INTO USUARIO (NOME, EMAIL, SENHA, NIVEL_ACESSO)
                         VALUES (?,?,?,?)";
             // valores a serem inseridos
             $valores = [
@@ -51,7 +51,7 @@
         }
 
         // método consultar
-        
+
         // método excluir
 
         // método atualizar

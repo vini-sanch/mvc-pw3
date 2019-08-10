@@ -1,5 +1,5 @@
 <?php
-    include_once('../controller/Usuario_controller.php');
+    include_once('../controller/Categoria_controller.php');
 ?>
 
 <!doctype html>
@@ -16,34 +16,13 @@
   <body>
     <br>
     <div class="container">
-        <form method="POST" action="?acao=cadastrar_usu">
+        <form method="POST" action="?acao=cadastrar_categoria">
             <fieldset>
-                <legend>Formulário de Usuário</legend>
+                <legend>Formulário de Categoria</legend>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
-                        <label for="id-nome" class="col-sm-1-12 col-form-label">Nome:</label><br/>
-                        <input type="text" maxlength="50" class="form-control" name="nome" id="id-nome" placeholder="Exemplo: Harry Potter" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-4-12">
-                        <label for="id-email" class="col-sm-1-12 col-form-label">E-mail:</label><br/>
-                        <input type="email" maxlength="50" class="form-control" name="email" id="id-email" placeholder="Exemplo: harrypotter@hogwarts.com" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-4-12">
-                        <label for="id-senha" class="col-sm-1-12 col-form-label">Senha:</label><br/>
-                        <input type="password" maxlength="50" class="form-control" name="senha" id="id-senha" />
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-4-12">
-                        <label for="id-nivel" class="col-sm-1-12 col-form-label">Nível de Acesso:</label><br/>
-                        <select name="nivel_acesso" class="col-sm-1-12 form-control" id="id-nivel">
-                            <option value="1">Administrador</option>
-                            <option value="2">Usuário</option>
-                        </select>
+                        <label for="id-categoria" class="col-sm-1-12 col-form-label">Nome da Categoria:</label><br/>
+                        <input type="text" maxlength="20" class="form-control" name="categoria" id="id-categoria" />
                     </div>
                 </div>
                 <div class="form-group row">

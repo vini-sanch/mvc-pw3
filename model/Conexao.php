@@ -7,7 +7,7 @@
             // nome do banco: bdnoticia
             // usuário: root (padrão)
             // senha: "" (vazia)
-            $conn = new PDO("mysql:host=localhost/dbname=bdnoticia",
+            $conn = new PDO("mysql:host=localhost;dbname=bdnoticia",
                             "root",
                             "");
             return $conn;
