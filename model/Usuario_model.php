@@ -1,6 +1,6 @@
 <?php
     class Usuario_model
-    {   
+    {
         // atributos da classe
         private $codusuario;
         private $nome;
@@ -57,4 +57,3 @@
         // método atualizar
     }
 ?>
-    

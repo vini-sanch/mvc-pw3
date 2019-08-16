@@ -1,5 +1,5 @@
 <?php
-    //incluindo o modelo de Usuário com funções CRUD 
+    //incluindo o modelo de Usuário com funções CRUD
     include_once('../model/Categoria_model.php');
 
     $categoria = new Categoria_model();
@@ -19,5 +19,4 @@
             break;
         }
     }
-    
 ?>
