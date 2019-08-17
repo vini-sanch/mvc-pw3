@@ -20,6 +20,8 @@
       <br>
       <a href="view/cad_usuario.php" class="btn btn-success">Cadastrar Usuário</a>
       <br><br>
+      <a href="view/cons_usuario.php" class="btn btn-warning">Consultar Usuário</a>
+      <br><br>
       <a href="view/cad_categoria.php" class="btn btn-info">Cadastrar Categoria</a>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

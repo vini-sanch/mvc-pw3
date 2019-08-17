@@ -40,20 +40,73 @@
             $valores = [
                 $this->nome,
                 $this->email,
-                $this->senha,
+                // função nativa do php para encriptação (gera 40 caracteres criptografados)
+                // há também a função md5 (gera 32 caracteres)
+                sha1($this->senha),
                 $this->nivel_acesso
             ];
             // função prepare substitui os parâmetros '?' pelos valores do array
-            //   escapando possíveis injeções de código
+            // escapando possíveis injeções de código
             $exec = $this->conn->prepare($sql_cmd);
             // executa o código
             $exec->execute($valores);
         }
 
         // método consultar
+        public function consultar()
+        {
+            // comando de consulta da tabela usuario
+            $sql_cmd = 'SELECT * FROM usuario';
+            $exec = $this->conn->prepare($sql_cmd);
+            $exec->execute();
+
+            // vetor que receberá os dados
+            $result = [];
+            // laço de repetição para armazenar os dados no vetor
+            // fetchAll transforma o retorno da query em uma matriz
+            foreach ($exec->fetchAll() as  $row) {
+                // instanciando um objeto desta classe
+                $user = new Usuario_model();
+                // atribuindo valores aos atributos o objeto de acordo com o retorno do banco
+                $user->codusuario = $row['CODUSUARIO'];
+                $user->nome = $row['NOME'];
+                $user->email = $row['EMAIL'];
+                $user->senha = $row['SENHA'];
+                $user->nivel_acesso = $row['NIVEL_ACESSO'];
+                // preenchendo o vetor dos resultados
+                $result[] = $user;
+            }
+            // retornando o vetor com os objetos
+            return $result;
+        }
 
         // método excluir
+        public function excluir()
+        {
+            // comando de exclusão de registro da tabela usuário
+            $sql_cmd = 'DELETE FROM usuario WHERE CODUSUARIO = ?';
+            $exec = $this->conn->prepare($sql_cmd);
+            // passando o 'codusuario' como parâmetro (ele é a chave primária do registro)
+            $exec->execute($this->codusuario);
+        }
 
         // método atualizar
+        public function atualizar()
+        {
+            // comando de atualização da tabela usuário
+            $sql_cmd = 'UPDATE usuario SET NOME = ?, EMAIL = ?, SENHA = ?, NIVEL_ACESSO = ? WHERE CODUSUARIO = ?';
+            $exec = $this->conn->prepare($sql_cmd);
+
+            // passando os atributos como parâmetros
+            $valores = [
+                $this->nome,
+                $this->email,
+                sha1($this->senha),
+                $this->nivel_acesso,
+                $this->codusuario
+            ];
+            //executando
+            $exec->execute($valores);
+        }
     }
 ?>

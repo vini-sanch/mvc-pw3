@@ -1,0 +1,95 @@
+/* Estilos css da página principal */
+/* fontes utilizadas no projeto */
+/* 'Fira Sans' fonte do tipo 'sans-serif' */
+/* 'Inconsolata' fonte do tipo 'monospace' */
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans|Inconsolata&display=swap');´
+
+/* 
+	Cores do Projeto
+
+	cinza claro: #ececec
+	azul água baby: #9fd3c7
+	azul acinzentado escuro: #385170
+	azul bem escuro: #142d4c
+*/
+
+/* Cofigurações padrão */
+/* altura 100% no documento
+	reset nas margens e espaços
+	configurando o tipo padrão de caixa
+	atribuindo a fonte padrão
+*/
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body, html {
+	height: 100%;
+	font-family: 'Fira Sans', sans-serif;
+}
+
+/* 
+	estilizando os links
+*/
+a {
+	text-decoration: none;
+	font-family: 'Inconsolata', monospace;
+}
+
+body {
+	margin: 0;
+	display: grid;	
+	grid-template-columns: 3fr 1fr;
+	grid-template-rows: 1fr 5fr 2fr;
+	grid-template-areas: "menu menu"
+						 "main aside"
+						 "footer footer";
+}
+
+.box-round, .nav-item > a {
+	border-radius: .7em;
+}
+
+/* Estilos do menu de navegação */
+
+.nav-main {
+	grid-area: menu;
+	background-color: #142d4c;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.nav-list {
+	list-style: none;
+}
+
+.nav-list > .nav-item {
+	display: inline-block;
+}
+
+.nav-item > a {
+	color: #ececec;
+	font-size: 14pt;
+	padding: 3vh 3vw;
+	border: solid #ececec 1pt;
+	transition: all .5s ease-out;
+}
+
+.nav-item > a:hover{
+	background-color: #385170;
+}
+
+.content-main {
+	grid-area: main;
+}
+
+.aside-main {
+	grid-area: aside;
+}
+
+.footer-main {
+	grid-area: footer;
+}
