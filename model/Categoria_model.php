@@ -34,6 +34,48 @@
             $exec = $this->conn->prepare($sql_cmd);
             $exec->execute($values);
         }
+
+        // deletar categoria
+        public function excluir()
+        {
+            $sql_cmd = "DELETE FROM CATEGORIA WHERE CODCATEGORIA = ?";
+            $exec = $this->conn->prepare($sql_cmd);
+            $exec->execute($this->cod_categoria);
+        }
+
+        // consulta de categoria
+        public function consultar()
+        {
+            // executando o comando
+            $sql_cmd = "SELECT * FROM CATEGORIA";
+            $exec = $this->conn->prepare($sql_cmd);
+            $exec->execute();
+
+            // declarando o array de retorno
+            $dados = [];
+
+            //executando o comando
+            foreach($exec->fetchAll() as $row) {
+               // instância para armazenar os objetos na array
+                $categoria = new Categoria_model();
+                $categoria->__set('cod_categoria', $row['CODCATEGORIA']);
+                $categoria->__set('nome_categoria', $row['NOMECATEGORIA']);
+                $dados[] = $categoria;
+            }
+
+            return $dados;
+        }
+
+        // atualização de categoria
+        public function atualizar()
+        {
+            $sql_cmd = "UPDATE CATEGORIA SET NOMECATEGORIA = ? WHERE CODCATEGORIA = ?";
+            $exec = $this->conn->prepare($sql_cmd);
+            $valores = [
+                $this->nome_categoria,
+                $this->cod_categoria
+            ];
+            $exec->execute($valores);
+        }
     }
-    
 ?>
