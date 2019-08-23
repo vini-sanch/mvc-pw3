@@ -12,7 +12,7 @@
 
 		public function __construct()
 		{
-			include_once('./Conexao.php');
+			include_once('Conexao.php');
 			$conn = new Conexao();
 			$this->conn = $conn->conectar();
 		}

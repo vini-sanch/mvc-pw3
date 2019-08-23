@@ -1,11 +1,11 @@
 <?php
-include_once('../controller/Usuario_controller.php');
+include_once('../controller/Noticia_controller.php');
 ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-	<title>Consulta de Usuários</title>
+	<title>Consulta de Notícias</title>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -24,23 +24,35 @@ include_once('../controller/Usuario_controller.php');
 	<br /><br />
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<table class="table table-striped" id='table-users' style="text-align:center;">
+			<div class="col-md-3">
+				<?php foreach ($noticia->consultar() as $valor) : ?>
+				<div class="card" style="width: 18rem;">
+					<div class="card-header">
+						<h5 class="card-title"><?php echo $valor->__get('titulo'); ?></h5>
+						<h5 class="card-title"><?php echo $valor->__get('cod_categoria'); ?></h5>
+					</div>
+					<div class="card-body">
+						<p class="card-text"><?php echo $valor->__get('autor'); ?></p>
+						<p class="card-text"><?php echo $valor->__get('data'); ?></p>
+						<p class="card-text"><?php echo $valor->__get('imagem'); ?></p>
+						<p class="card-text"><?php echo $valor->__get('conteudo'); ?></p>
+					</div>
+				</div>
+				<br><br>
+				<?php endforeach; ?>
+				<!-- <table class="table table-striped" id='table-users' style="text-align:center;">
 					<thead>
 						<tr>
 							<th colspan="5">
-								<h2>Usuários Cadastrados</h2>
+								<h2>Notícias</h2>
 							</th>
 						</tr>
 						<tr>
 							<th scope="col">
-								<h5>Código</h5>
+								<h5>Título</h5>
 							</th>
 							<th scope="col">
-								<h5>Nome</h5>
-							</th>
-							<th scope="col">
-								<h5>E-mail</h5>
+								<h5>Data</h5>
 							</th>
 							<th scope="col">
 								<h5>Senha</h5>
@@ -65,7 +77,7 @@ include_once('../controller/Usuario_controller.php');
 						</tr>
 						<?php endforeach; ?>
 					</tbody>
-				</table>
+				</table> -->
 			</div>
 		</div>
 	</div>
