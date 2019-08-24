@@ -86,8 +86,11 @@
             // comando de exclusão de registro da tabela usuário
             $sql_cmd = 'DELETE FROM usuario WHERE CODUSUARIO = ?';
             $exec = $this->conn->prepare($sql_cmd);
+            $valores = [
+                $this->codusuario
+            ];
             // passando o 'codusuario' como parâmetro (ele é a chave primária do registro)
-            $exec->execute($this->codusuario);
+            $exec->execute($valores);
         }
 
         // método atualizar

@@ -1,5 +1,6 @@
 <?php
 include_once('../controller/Noticia_controller.php');
+include_once('../controller/Categoria_controller.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,61 +25,27 @@ include_once('../controller/Noticia_controller.php');
 	<br /><br />
 	<div class="container">
 		<div class="row">
+		<?php foreach ($noticia->consultar() as $valor) : ?>
 			<div class="col-md-3">
-				<?php foreach ($noticia->consultar() as $valor) : ?>
 				<div class="card" style="width: 18rem;">
 					<div class="card-header">
 						<h5 class="card-title"><?php echo $valor->__get('titulo'); ?></h5>
-						<h5 class="card-title"><?php echo $valor->__get('cod_categoria'); ?></h5>
+						<h5 class="card-title">
+						<?php 
+							$cat = $categoria->consultar([$valor->__get('cod_categoria')]);
+							echo 'Categoria: ' . $cat[0]->__get('nome_categoria'); 
+						?></h5>
 					</div>
 					<div class="card-body">
-						<p class="card-text"><?php echo $valor->__get('autor'); ?></p>
-						<p class="card-text"><?php echo $valor->__get('data'); ?></p>
-						<p class="card-text"><?php echo $valor->__get('imagem'); ?></p>
+						<p class="card-text">Autor: <?php echo $valor->__get('autor'); ?></p>
+						<p class="card-text">Data: <?php echo $valor->__get('data'); ?></p>
+						<p class="card-text">Imagem: <?php echo $valor->__get('imagem'); ?></p>
 						<p class="card-text"><?php echo $valor->__get('conteudo'); ?></p>
 					</div>
 				</div>
 				<br><br>
-				<?php endforeach; ?>
-				<!-- <table class="table table-striped" id='table-users' style="text-align:center;">
-					<thead>
-						<tr>
-							<th colspan="5">
-								<h2>Notícias</h2>
-							</th>
-						</tr>
-						<tr>
-							<th scope="col">
-								<h5>Título</h5>
-							</th>
-							<th scope="col">
-								<h5>Data</h5>
-							</th>
-							<th scope="col">
-								<h5>Senha</h5>
-							</th>
-							<th scope="col">
-								<h5>Nível de Acesso</h5>
-							</th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php foreach ($usuario->consultar() as $value) : ?>
-						<tr>
-							<td scope="row"><strong><?php echo $value->codusuario; ?></strong></td>
-							<td><?php echo $value->nome; ?></td>
-							<td><?php echo $value->email; ?></td>
-							<td><?php echo $value->senha; ?></td>
-							<td>
-								<?php
-									echo ($value->nivel_acesso == 1) ? 'Administrador' : 'Usuário';
-									?>
-							</td>
-						</tr>
-						<?php endforeach; ?>
-					</tbody>
-				</table> -->
 			</div>
+			<?php endforeach; ?>
 		</div>
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

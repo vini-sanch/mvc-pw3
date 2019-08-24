@@ -10,7 +10,6 @@
   <style>
     body {
       padding: 5%;
-      background: #05041A;
     }
   </style>
 
@@ -18,16 +17,16 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background: #05041A;">
   <h1 style="color:white">Jornal</h1>
   <br /><br />
   <a href="view/cad_usuario.php" class="btn btn-outline-success">Cadastrar Usuário</a>
   <br /><br />
   <a href="view/cons_usuario.php" class="btn btn-outline-success">Consultar Usuário</a>
   <br /><br />
-  <a href="view/cons_noticia.php" class="btn btn-outline-info">Consultar Notícia</a>
+  <a href="view/cad_categoria.php" class="btn btn-outline-info">Cadastrar Categoria</a>
   <br /><br />
-  <a href="view/cad_categoria.php" class="btn btn-outline-danger">Cadastrar Categoria</a>
+  <a href="view/cons_noticia.php" class="btn btn-outline-danger">Consultar Notícia</a>
   <br /><br />
   <a href="view/cad_noticia.php" class="btn btn-outline-danger">Cadastrar Notícia</a>
   <!-- Optional JavaScript -->

@@ -44,12 +44,21 @@
         }
 
         // consulta de categoria
-        public function consultar()
+        public function consultar(array $condicao = null)
         {
-            // executando o comando
-            $sql_cmd = "SELECT * FROM CATEGORIA";
-            $exec = $this->conn->prepare($sql_cmd);
-            $exec->execute();
+            if(isset($condicao)) {
+                // executando o comando
+                $sql_cmd = "SELECT * FROM CATEGORIA WHERE CODCATEGORIA = ?";
+                $exec = $this->conn->prepare($sql_cmd);
+                $exec->execute($condicao);
+            }
+            else {
+                // executando o comando
+                $sql_cmd = "SELECT * FROM CATEGORIA";
+                $exec = $this->conn->prepare($sql_cmd);
+                $exec->execute();
+            }
+
 
             // declarando o array de retorno
             $dados = [];

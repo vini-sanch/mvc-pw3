@@ -34,9 +34,6 @@ include_once('../controller/Usuario_controller.php');
 						</tr>
 						<tr>
 							<th scope="col">
-								<h5>Código</h5>
-							</th>
-							<th scope="col">
 								<h5>Nome</h5>
 							</th>
 							<th scope="col">
@@ -48,12 +45,14 @@ include_once('../controller/Usuario_controller.php');
 							<th scope="col">
 								<h5>Nível de Acesso</h5>
 							</th>
+							<th scope='col'>
+								<h5>Ação</h5>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
 						<?php foreach ($usuario->consultar() as $value) : ?>
 						<tr>
-							<td scope="row"><strong><?php echo $value->codusuario; ?></strong></td>
 							<td><?php echo $value->nome; ?></td>
 							<td><?php echo $value->email; ?></td>
 							<td><?php echo $value->senha; ?></td>
@@ -61,6 +60,9 @@ include_once('../controller/Usuario_controller.php');
 								<?php
 									echo ($value->nivel_acesso == 1) ? 'Administrador' : 'Usuário';
 									?>
+							</td>
+							<td>
+								<a class='btn btn-outline-danger' onclick="confirma()" href="?codusuario=<?php echo $value->__get('codusuario') ?>&acao=excluir_usu">X</a>
 							</td>
 						</tr>
 						<?php endforeach; ?>
@@ -75,6 +77,12 @@ include_once('../controller/Usuario_controller.php');
 		$(document).ready(function() {
 			$('#table-users').DataTable();
 		});
+	</script>
+
+	<script>
+		function confirma() {
+			return confirm("Deseja realmente excluir esse usuário?");
+		}
 	</script>
 </body>
 

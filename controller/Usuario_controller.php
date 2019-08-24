@@ -20,6 +20,11 @@
                     window.location.href = 'cad_usuario.php';
                 </script>";
             break;
+            case 'excluir_usu':
+                $usuario->__set('codusuario', $_GET['codusuario']);
+                $usuario->excluir();
+                echo "<script>window.location.href='cons_usuario.php';</script>";
+            break;
         }
     }
     
