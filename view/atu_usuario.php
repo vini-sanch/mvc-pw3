@@ -23,22 +23,28 @@ include_once('../controller/Usuario_controller.php');
 
 <body>
     <br>
-    <a href="../index.php" class="btn btn-outline-success">Voltar</a>
+    <a href="cons_usuario.php" class="btn btn-outline-success">Voltar</a>
     <br /><br />
     <div class="container">
-        <form method="POST" onsubmit="return verificarSenha();" action="?acao=cadastrar_usu">
+        <form method="POST" onsubmit="return verificarSenha();" action="?acao=atualizar_usu">
             <fieldset>
-                <legend>Formulário de Usuário</legend>
+                <legend>Atualizar Usuário</legend>
+                <div class="form-group row">
+                    <div class="col-sm-4-12">
+                        <label for="id-usuario" class="col-sm-1-12 col-form-label">Código do Usuário:</label><br />
+                        <input type="text" class="form-control" name="codusuario" id="id-usuario" value="<?php echo $usuario->__get('codusuario'); ?>"  required readonly />
+                    </div>
+                </div>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
                         <label for="id-nome" class="col-sm-1-12 col-form-label">Nome:</label><br />
-                        <input type="text" maxlength="50" class="form-control" name="nome" id="id-nome" required placeholder="Exemplo: Harry Potter" />
+                        <input type="text" maxlength="50" class="form-control" name="nome"  id="id-nome" value="<?php echo $usuario->__get('nome'); ?>" required placeholder="Exemplo: Harry Potter" />
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
                         <label for="id-email" class="col-sm-1-12 col-form-label">E-mail:</label><br />
-                        <input type="email" maxlength="50" class="form-control" name="email" id="id-email" required placeholder="Exemplo: harrypotter@hogwarts.com" />
+                        <input type="email" maxlength="50" class="form-control" name="email" id="id-email" value="<?php echo $usuario->__get('email'); ?>" required placeholder="Exemplo: harrypotter@hogwarts.com" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -57,15 +63,15 @@ include_once('../controller/Usuario_controller.php');
                     <div class="col-sm-4-12">
                         <label for="id-nivel" class="col-sm-1-12 col-form-label">Nível de Acesso:</label><br />
                         <select name="nivel_acesso" required class="col-sm-1-12 form-control" id="id-nivel">
-                            <option value="1">Administrador</option>
-                            <option value="2">Usuário</option>
+                            <option <?php echo $usuario->__get('nivel_acesso') == 1 ? 'selected': null; ?> value="1">Administrador</option>
+                            <option <?php echo $usuario->__get('nivel_acesso') == 2 ? 'selected': null; ?> value="2">Usuário</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
-                        <input type="submit" class="btn btn-primary" value="Cadastrar">
+                        <input type="submit" class="btn btn-primary" value="Atualizar">
                     </div>
                 </div>
             </fieldset>

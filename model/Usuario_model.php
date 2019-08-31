@@ -97,7 +97,10 @@
         public function atualizar()
         {
             // comando de atualização da tabela usuário
-            $sql_cmd = 'UPDATE usuario SET NOME = ?, EMAIL = ?, SENHA = ?, NIVEL_ACESSO = ? WHERE CODUSUARIO = ?';
+            $sql_cmd = 'UPDATE usuario 
+                        SET NOME = ?, EMAIL = ?, SENHA = ?, NIVEL_ACESSO = ? 
+                        WHERE CODUSUARIO = ?';
+            
             $exec = $this->conn->prepare($sql_cmd);
 
             // passando os atributos como parâmetros
@@ -110,6 +113,26 @@
             ];
             //executando
             $exec->execute($valores);
+        }
+
+        // método de retorno de um usuário apenas
+        public function retornarDados()
+        {
+            $sql_cmd = 'SELECT * FROM usuario WHERE CODUSUARIO = ?';
+            $valor = [$this->codusuario];
+            $exec = $this->conn->prepare($sql_cmd);
+            $exec->execute($valor);
+            
+            $row = $exec->fetch();
+            
+            $user = new Usuario_model();
+            $user->codusuario = $row['CODUSUARIO'];
+            $user->nome = $row['NOME'];
+            $user->email = $row['EMAIL'];
+            $user->senha = $row['SENHA'];
+            $user->nivel_acesso = $row['NIVEL_ACESSO'];
+            
+            return $user;
         }
     }
 ?>

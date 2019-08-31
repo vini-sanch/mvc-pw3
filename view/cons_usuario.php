@@ -62,7 +62,8 @@ include_once('../controller/Usuario_controller.php');
 									?>
 							</td>
 							<td>
-								<a class='btn btn-outline-danger' onclick="confirma()" href="?codusuario=<?php echo $value->__get('codusuario') ?>&acao=excluir_usu">X</a>
+								<a class='btn btn-outline-danger' onclick="confirma()" href="?codusuario=<?php echo $value->__get('codusuario'); ?>&acao=excluir_usu">Excluir</a>
+								<a class='btn btn-outline-warning' href="atu_usuario.php?codusuario=<?php echo $value->__get('codusuario'); ?>&acao=dados_usu">Editar</a>
 							</td>
 						</tr>
 						<?php endforeach; ?>
