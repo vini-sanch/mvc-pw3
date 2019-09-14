@@ -1,7 +1,6 @@
 <?php
-    //incluindo o modelo de Usuário com funções CRUD 
-    include_once('../model/Usuario_model.php');
-
+    //incluindo o modelo de Usuário com funções CRUD
+    include_once('model/Usuario_model.php');
     $usuario = new Usuario_model();
 
     if(isset($_REQUEST['acao'])) {
@@ -18,6 +17,35 @@
                 echo "<script>
                     alert('Dados gravados com sucesso!');
                     window.location.href = 'cad_usuario.php';
+                </script>";
+            break;
+            case 'logar_usu':
+                valida_tentativa();
+                $usuario->__set('email', $_POST['email']);
+                $usuario->__set('senha', $_POST['senha']);
+                $usuario = $usuario->logar();
+
+                if(isset($usuario)) {
+                    echo "<script>
+                        alert('Usuário Não Encontrado!');
+                        window.location.href = 'login.php';
+                    </script>";
+                }
+                else {
+                    session_start();
+                    $_SESSION['cod_logado'] = $usuario->__get('codusuario');
+                    $_SESSION['nome_logado'] = $usuario->__get('nome');
+                    $_SESSION['nivel_logado'] = $usuario->__get('nivel_acesso');
+                    echo "<script>
+                        window.location.href = 'index.php';
+                    </script>";
+                }
+            break;
+            case 'sair':
+                session_start();
+                session_destroy();
+                echo "<script>
+                    window.location.href = 'login.php';
                 </script>";
             break;
             case 'excluir_usu':
@@ -46,6 +74,24 @@
             $usuario = $usuario->retornarDados();
             break;
         }
+    }
+
+    function valida_tentativa() {
+        session_start();
+        $numero_tentativas = $_SESSION['num_try'];
+
+        $numero_tentativas++;
+
+        if($numero_tentativas >= 3) {
+            $numero_tentativas = 0;
+            $_SESSION['num_try'] = $numero_tentativas;
+            $_SESSION['captcha'] = true;
+            echo "<script>
+                    window.location.href = 'captcha.php';
+                </script>";
+        }
+
+        $_SESSION['num_try'] = $numero_tentativas;
     }
     
 ?>

@@ -1,5 +1,13 @@
 <?php
-include_once('../controller/Categoria_controller.php');
+session_start();
+include_once('controller/Categoria_controller.php');
+include_once('controller/Usuario_controller.php');
+
+if(!isset($_SESSION['cod_logado'])) {
+  echo "<script>
+			window.location.href = 'login.php';
+		</script>";
+}
 ?>
 
 <!doctype html>
@@ -22,7 +30,7 @@ include_once('../controller/Categoria_controller.php');
 
 <body>
     <br>
-    <a href="../index.php" class="btn btn-outline-success">Voltar</a>
+    <a href="index.php" class="btn btn-outline-success">Voltar</a>
     <br /><br />
     <div class="container">
         <form method="POST" action="?acao=cadastrar_categoria">

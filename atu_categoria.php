@@ -1,5 +1,13 @@
 <?php
-include_once('../controller/Categoria_controller.php');
+session_start();
+include_once('controller/Categoria_controller.php');
+include_once('controller/Usuario_controller.php');
+
+if(!isset($_SESSION['cod_logado'])) {
+  echo "<script>
+			window.location.href = 'login.php';
+		</script>";
+}
 ?>
 
 <!doctype html>

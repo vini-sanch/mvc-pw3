@@ -134,5 +134,28 @@
             
             return $user;
         }
+
+        // método de retorno de um usuário apenas
+        public function logar()
+        {
+            $sql_cmd = 'SELECT * FROM usuario WHERE EMAIL = ? AND SENHA = ?';
+            $valor = [$this->email, sha1($this->senha)];
+            $exec = $this->conn->prepare($sql_cmd);
+            $exec->execute($valor);
+            
+            $row = $exec->fetch();
+            
+            $user = new Usuario_model();
+            if(!empty($row))
+            {
+                $user->codusuario = $row['CODUSUARIO'];
+                $user->nome = $row['NOME'];
+                $user->email = $row['EMAIL'];
+                $user->senha = $row['SENHA'];
+                $user->nivel_acesso = $row['NIVEL_ACESSO'];
+            }
+            
+            return $user;
+        }
     }
 ?>

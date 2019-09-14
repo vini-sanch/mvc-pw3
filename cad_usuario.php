@@ -1,5 +1,5 @@
 <?php
-include_once('../controller/Usuario_controller.php');
+    include_once('controller/Usuario_controller.php');
 ?>
 
 <!doctype html>
@@ -23,7 +23,7 @@ include_once('../controller/Usuario_controller.php');
 
 <body>
     <br>
-    <a href="../index.php" class="btn btn-outline-success">Voltar</a>
+    <a href="index.php" class="btn btn-outline-success">Voltar</a>
     <br /><br />
     <div class="container">
         <form method="POST" onsubmit="return verificarSenha();" action="?acao=cadastrar_usu">
