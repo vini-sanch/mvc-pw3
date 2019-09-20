@@ -1,43 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>Notícias - MVC PW III</title>
-	<link rel="stylesheet" href="../css/styles-index.css">
+	<link rel="shortcut icon" href="../img/logo_43.ico" type="image/x-icon">
+	<link rel="stylesheet" href="../css/bootstrap.min.css" />
 </head>
 <body>
-	<!-- Menu de navegação -->
-	<nav class="nav-main">
-		<!-- Possível Logotipo inicial do menu -->
-		<!-- <div class="nav-brand">
-			<a href="#">
-				<img src="#" title="Notícias" alt="Logotipo do Site" />
-			</a>
-		</div> -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+		<a class="navbar-brand" href="#">
+			<picture>
+				<img alt="Logo do site" src="../img/logo_64.png" />
+			</picture>
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+			aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-		<!-- Itens do menu -->
-		<ul class="nav-list">
-			<li class="nav-item">
-				<a href="view/cad_usuario">Cadastrar Usuário</a>
-			</li>
-			<li class="nav-item">
-				<a href="view/cons_usuario">Consultar Usuário</a>
-			</li>
-			<li class="nav-item">
-				<a href="view/cad_categoria">Cadastrar Categoria</a>
-			</li>
-		</ul>
+		<div class="collapse navbar-collapse" id="navbarColor01">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Ínicio <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item dropdown show">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true">Categorias</a>
+					<div class="dropdown-menu show" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
+						<a class="dropdown-item" href="#">lorem Ipsum</a>
+					</div>
+				</li>
+			</ul>
+			<button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Área Restrita</button>
+		</div>
 	</nav>
 
-	<!-- Possível Conteúdo Principal da Index -->
-	<main class="content-main box-round"></main>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-8">
+				
+			</div>
 
-	<!-- Possível barra lateral de conteúdo da Index -->
-	<aside class="aside-main box-round"></aside>
+			<div class="col-4">
 
-	<!-- Rodapé do Site -->
-	<footer class="footer-main box-round"></footer>
+			</div>
+		</div>
+	</div>
+
+	<script src="../js/jquery-3.3.1.slim.min.js"></script>
+	<script src="../js/popper.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
 </body>
 </html>

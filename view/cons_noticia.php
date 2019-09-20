@@ -8,10 +8,10 @@ include_once('../controller/Categoria_controller.php');
 <head>
 	<title>Consulta de Notícias</title>
 	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+	<link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" />
 	<style>
 		body {
 			padding: 5%;
@@ -20,31 +20,32 @@ include_once('../controller/Categoria_controller.php');
 </head>
 
 <body>
-	<br>
+	<br/>
 	<a href="../index.php" class="btn btn-outline-success">Voltar</a>
-	<br /><br />
+	<br/><br/>
 	<div class="container">
 		<div class="row">
-		<?php foreach ($noticia->consultar() as $valor) : ?>
-			<div class="col-md-3">
-				<div class="card" style="width: 18rem;">
-					<div class="card-header">
-						<h5 class="card-title"><?php echo $valor->__get('titulo'); ?></h5>
-						<h5 class="card-title">
-						<?php 
-							$cat = $categoria->consultar([$valor->__get('cod_categoria')]);
-							echo 'Categoria: ' . $cat[0]->__get('nome_categoria'); 
-						?></h5>
+			<?php foreach ($noticia->consultar() as $valor) : ?>
+				<div class="col-md-3">
+					<div class="card" style="width: 18rem;">
+						<div class="card-header">
+							<h5 class="card-title"><?php echo $valor->__get('titulo'); ?></h5>
+							<h5 class="card-title">
+								<?php 
+									$cat = $categoria->consultar([$valor->__get('cod_categoria')]);
+									echo 'Categoria: ' . $cat[0]->__get('nome_categoria');
+								?>
+							</h5>
+						</div>
+						<div class="card-body">
+							<p class="card-text">Autor: <?php echo $valor->__get('autor'); ?></p>
+							<p class="card-text">Data: <?php echo $valor->__get('data'); ?></p>
+							<p class="card-text">Imagem: <?php echo $valor->__get('imagem'); ?></p>
+							<p class="card-text"><?php echo $valor->__get('conteudo'); ?></p>
+						</div>
 					</div>
-					<div class="card-body">
-						<p class="card-text">Autor: <?php echo $valor->__get('autor'); ?></p>
-						<p class="card-text">Data: <?php echo $valor->__get('data'); ?></p>
-						<p class="card-text">Imagem: <?php echo $valor->__get('imagem'); ?></p>
-						<p class="card-text"><?php echo $valor->__get('conteudo'); ?></p>
-					</div>
+					<br/><br/>
 				</div>
-				<br><br>
-			</div>
 			<?php endforeach; ?>
 		</div>
 	</div>
