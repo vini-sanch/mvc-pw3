@@ -1,6 +1,14 @@
 <?php
-include_once('../controller/Usuario_controller.php');
+  session_start();
+  include_once('controller/Usuario_controller.php');
+
+  if(!isset($_SESSION['cod_logado'])) {
+    echo "<script>
+              window.location.href = 'login.php';
+		  </script>";
+  }
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -20,7 +28,7 @@ include_once('../controller/Usuario_controller.php');
 
 <body>
 	<br>
-	<a href="../index.php" class="btn btn-outline-success">Voltar</a>
+	<a href="index.php" class="btn btn-outline-success">Voltar</a>
 	<br /><br />
 	<div class="container">
 		<div class="row">
@@ -62,7 +70,8 @@ include_once('../controller/Usuario_controller.php');
 									?>
 							</td>
 							<td>
-								<a class='btn btn-outline-danger' onclick="confirma()" href="?codusuario=<?php echo $value->__get('codusuario') ?>&acao=excluir_usu">X</a>
+								<a class='btn btn-outline-danger' onclick="confirma()" href="?codusuario=<?php echo $value->__get('codusuario'); ?>&acao=excluir_usu">Excluir</a>
+								<a class='btn btn-outline-warning' href="atu_usuario.php?codusuario=<?php echo $value->__get('codusuario'); ?>&acao=dados_usu">Editar</a>
 							</td>
 						</tr>
 						<?php endforeach; ?>

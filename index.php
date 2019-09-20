@@ -1,3 +1,13 @@
+<?php
+  session_start();
+  include_once('controller/Usuario_controller.php');
+
+  if(!isset($_SESSION['cod_logado'])) {
+    echo "<script>
+              window.location.href = 'login.php';
+		  </script>";
+  }
+?>
 <!doctype html>
 <html lang="en">
 
@@ -19,16 +29,19 @@
 
 <body style="background: #05041A;">
   <h1 style="color:white">Jornal</h1>
+  <h3 style="color:white">Bem-vindo, <?php echo $_SESSION['nome_logado']; ?></h3>
   <br /><br />
-  <a href="view/cad_usuario.php" class="btn btn-outline-success">Cadastrar Usuário</a>
+  <a href="cad_usuario.php" class="btn btn-outline-success">Cadastrar Usuário</a>
   <br /><br />
-  <a href="view/cons_usuario.php" class="btn btn-outline-success">Consultar Usuário</a>
+  <a href="cons_usuario.php" class="btn btn-outline-success">Consultar Usuário</a>
   <br /><br />
-  <a href="view/cad_categoria.php" class="btn btn-outline-info">Cadastrar Categoria</a>
+  <a href="cad_categoria.php" class="btn btn-outline-info">Cadastrar Categoria</a>
   <br /><br />
-  <a href="view/cons_noticia.php" class="btn btn-outline-danger">Consultar Notícia</a>
+  <a href="cons_noticia.php" class="btn btn-outline-warning">Consultar Notícia</a>
   <br /><br />
-  <a href="view/cad_noticia.php" class="btn btn-outline-danger">Cadastrar Notícia</a>
+  <a href="cad_noticia.php" class="btn btn-outline-warning">Cadastrar Notícia</a>
+  <br /><br />
+  <a href="login.php?acao=sair" class="btn btn-outline-danger">Sair</a>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

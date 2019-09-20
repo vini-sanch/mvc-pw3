@@ -1,6 +1,14 @@
 <?php
-include_once('../controller/Noticia_controller.php');
-include_once('../controller/Categoria_controller.php');
+session_start();
+include_once('controller/Noticia_controller.php');
+include_once('controller/Categoria_controller.php');
+include_once('controller/Usuario_controller.php');
+
+if(!isset($_SESSION['cod_logado'])) {
+  echo "<script>
+			window.location.href = 'login.php';
+		</script>";
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -24,12 +32,12 @@ include_once('../controller/Categoria_controller.php');
 
 <body>
 	<br>
-	<a href="../index.php" class="btn btn-outline-success">Voltar</a>
+	<a href="index.php" class="btn btn-outline-success">Voltar</a>
 	<br /><br />
 	<div class="container">
-		<form method="POST" action="?acao=cadastrar_noticia">
+		<form method="POST" action="?acao=cadastrar_noticia" enctype="multipart/form-data">
 			<fieldset>
-				<legend>Formulário de Usuário</legend>
+				<legend>Formulário de Notícia</legend>
 				<div class="form-group row">
 					<div class="col-sm-4-12">
 						<label for="id-titulo" class="col-sm-1-12 col-form-label">Título:</label><br />
@@ -51,7 +59,7 @@ include_once('../controller/Categoria_controller.php');
 				<div class="form-group row">
 					<div class="col-sm-4-12">
 						<label for="id-imagem" class="col-sm-1-12 col-form-label">Imagem:</label><br />
-						<input type="text" maxlength="60" class="form-control" name="imagem" id="id-imagem" required />
+						<input type="file" maxlength="60" accept="image/*" class="form-control" name="imagem" id="id-imagem" required />
 					</div>
 				</div>
 				<div class="form-group row">

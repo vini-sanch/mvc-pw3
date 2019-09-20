@@ -1,5 +1,13 @@
 <?php
-include_once('../controller/Categoria_controller.php');
+session_start();
+include_once('controller/Categoria_controller.php');
+include_once('controller/Usuario_controller.php');
+
+if(!isset($_SESSION['cod_logado'])) {
+  echo "<script>
+			window.location.href = 'login.php';
+		</script>";
+}
 ?>
 
 <!doctype html>
@@ -16,28 +24,35 @@ include_once('../controller/Categoria_controller.php');
             background: #05041A;
         }
     </style>
+
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
 <body>
     <br>
-    <a href="../index.php" class="btn btn-outline-success">Voltar</a>
+    <a href="cons_categoria.php" class="btn btn-outline-success">Voltar</a>
     <br /><br />
     <div class="container">
-        <form method="POST" action="?acao=cadastrar_categoria">
+        <form method="POST" action="?acao=atualizar_cat">
             <fieldset>
-                <legend>Formulário de Categoria</legend>
+                <legend>Atualizar Categoria</legend>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
-                        <label for="id-categoria" class="col-sm-1-12 col-form-label">Nome da Categoria:</label><br />
-                        <input type="text" maxlength="20" class="form-control" name="categoria" id="id-categoria" />
+                        <label for="id-categoria" class="col-sm-1-12 col-form-label">Código da Categoria:</label><br />
+                        <input type="text" class="form-control" name="codcategoria" id="id-categoria" value="<?php echo $categoria->__get('cod_categoria'); ?>"  required readonly />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4-12">
+                        <label for="id-nomecategoria" class="col-sm-1-12 col-form-label">Nome da Categoria:</label><br />
+                        <input type="text" maxlength="50" class="form-control" name="nomecategoria"  id="id-nomecategoria" value="<?php echo $categoria->__get('nome_categoria'); ?>" required  />
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
-                        <input type="submit" class="btn btn-primary" value="Cadastrar">
+                        <input type="submit" class="btn btn-primary" value="Atualizar">
                     </div>
                 </div>
             </fieldset>
