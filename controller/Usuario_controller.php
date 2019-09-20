@@ -19,16 +19,16 @@
                     window.location.href = 'cad_usuario.php';
                 </script>";
             break;
+
             case 'logar_usu':
                 valida_tentativa();
                 $usuario->__set('email', $_POST['email']);
                 $usuario->__set('senha', $_POST['senha']);
                 $usuario = $usuario->logar();
 
-                if(isset($usuario)) {
+                if(empty($usuario->__get('codusuario'))) {
                     echo "<script>
                         alert('Usuário Não Encontrado!');
-                        window.location.href = 'login.php';
                     </script>";
                 }
                 else {
@@ -41,6 +41,7 @@
                     </script>";
                 }
             break;
+
             case 'sair':
                 session_start();
                 session_destroy();
@@ -48,11 +49,13 @@
                     window.location.href = 'login.php';
                 </script>";
             break;
+
             case 'excluir_usu':
                 $usuario->__set('codusuario', $_GET['codusuario']);
                 $usuario->excluir();
                 echo "<script>window.location.href='cons_usuario.php';</script>";
             break;
+            
             case 'atualizar_usu':
                 // passando os dados para o objeto
                 $usuario->__set('nome', $_POST['nome']);
@@ -68,10 +71,29 @@
                     window.location.href = 'cons_usuario.php';
                 </script>";
             break;
+
             case 'dados_usu':
-            $usuario->__set('codusuario', $_GET['codusuario']);
-            // preenche o objeto com dados de retorno
-            $usuario = $usuario->retornarDados();
+                $usuario->__set('codusuario', $_GET['codusuario']);
+                // preenche o objeto com dados de retorno
+                $usuario = $usuario->retornarDados();
+            break;
+
+            case 'confirmar_captcha':
+                $tentativa = $_POST['tentativa'];
+                $resultado = $_POST['resultado'];
+
+                if($tentativa == $resultado) {
+                    session_start();
+                    session_unset('captcha');
+                    echo "<script>
+                                window.location.href = 'login.php';
+                            </script>";
+                }
+                else{
+                    echo "<script>
+                        alert('Por favor, tente novamente!');
+                    </script>";
+                }
             break;
         }
     }
@@ -79,12 +101,10 @@
     function valida_tentativa() {
         session_start();
         $numero_tentativas = $_SESSION['num_try'];
-
         $numero_tentativas++;
 
         if($numero_tentativas >= 3) {
-            $numero_tentativas = 0;
-            $_SESSION['num_try'] = $numero_tentativas;
+            $_SESSION['num_try'] = 0;
             $_SESSION['captcha'] = true;
             echo "<script>
                     window.location.href = 'captcha.php';

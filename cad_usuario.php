@@ -1,5 +1,11 @@
 <?php
     include_once('controller/Usuario_controller.php');
+    $admin = true;
+
+    session_start();
+    if (!isset($_SESSION['cod_logado'])) {
+        $admin = false;
+    }
 ?>
 
 <!doctype html>
@@ -55,11 +61,15 @@
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
-                        <label for="id-nivel" class="col-sm-1-12 col-form-label">Nível de Acesso:</label><br />
-                        <select name="nivel_acesso" required class="col-sm-1-12 form-control" id="id-nivel">
-                            <option value="1">Administrador</option>
-                            <option value="2">Usuário</option>
-                        </select>
+                        <?php if($admin): ?>
+                            <label for="id-nivel" class="col-sm-1-12 col-form-label">Nível de Acesso:</label><br />
+                            <select name="nivel_acesso" required class="col-sm-1-12 form-control" id="id-nivel">
+                                <option value="1">Administrador</option>
+                                <option value="2">Usuário</option>
+                            </select>
+                        <?php else: ?>
+                            <input type="hidden" name="nivel_acesso" value="2" />
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="form-group row">

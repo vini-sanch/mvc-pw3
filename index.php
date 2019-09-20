@@ -1,12 +1,14 @@
 <?php
-  session_start();
-  include_once('controller/Usuario_controller.php');
+session_start();
+include_once('controller/Usuario_controller.php');
 
-  if(!isset($_SESSION['cod_logado'])) {
-    echo "<script>
+if (!isset($_SESSION['cod_logado'])) {
+  echo "<script>
               window.location.href = 'login.php';
 		  </script>";
-  }
+}
+
+$acesso = $_SESSION['nivel_logado'];
 ?>
 <!doctype html>
 <html lang="en">
@@ -31,15 +33,19 @@
   <h1 style="color:white">Jornal</h1>
   <h3 style="color:white">Bem-vindo, <?php echo $_SESSION['nome_logado']; ?></h3>
   <br /><br />
-  <a href="cad_usuario.php" class="btn btn-outline-success">Cadastrar Usuário</a>
-  <br /><br />
-  <a href="cons_usuario.php" class="btn btn-outline-success">Consultar Usuário</a>
-  <br /><br />
-  <a href="cad_categoria.php" class="btn btn-outline-info">Cadastrar Categoria</a>
-  <br /><br />
-  <a href="cons_noticia.php" class="btn btn-outline-warning">Consultar Notícia</a>
+  <?php if ($acesso == 1) : ?>
+    <a href="cad_usuario.php" class="btn btn-outline-success">Cadastrar Usuário</a>
+    <br /><br />
+    <a href="cons_usuario.php" class="btn btn-outline-success">Consultar Usuário</a>
+    <br /><br />
+    <a href="cad_categoria.php" class="btn btn-outline-info">Cadastrar Categoria</a>
+    <br /><br />
+  <?php endif; ?>
+  <a href="cons_categoria.php" class="btn btn-outline-info">Consultar Categoria</a>
   <br /><br />
   <a href="cad_noticia.php" class="btn btn-outline-warning">Cadastrar Notícia</a>
+  <br /><br />
+  <a href="cons_noticia.php" class="btn btn-outline-warning">Consultar Notícia</a>
   <br /><br />
   <a href="login.php?acao=sair" class="btn btn-outline-danger">Sair</a>
   <!-- Optional JavaScript -->

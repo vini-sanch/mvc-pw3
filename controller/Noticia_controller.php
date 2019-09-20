@@ -1,6 +1,6 @@
 <?php
 //incluindo o modelo de Usuário com funções CRUD
-include_once('../model/Noticia_model.php');
+include_once('model/Noticia_model.php');
 
 $noticia = new Noticia_model();
 
@@ -19,7 +19,6 @@ if (isset($_REQUEST['acao'])) {
 			move_uploaded_file($nome_tmp, $destino);
 
 			$noticia->__set('imagem', $nome_arquivo);
-
 			$noticia->__set('autor', $_POST['autor']);
 			$noticia->__set('cod_categoria', $_POST['categoria']);
 			$noticia->__set('data', $_POST['data']);

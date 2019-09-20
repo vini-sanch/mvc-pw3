@@ -8,6 +8,12 @@ if(!isset($_SESSION['cod_logado'])) {
 			window.location.href = 'login.php';
 		</script>";
 }
+if ($_SESSION['nivel_logado'] == 2) {
+    echo "<script>
+            alert('Acesso Proibido!');
+            window.location.href = 'index.php';
+        </script>";
+}
 ?>
 
 <!doctype html>

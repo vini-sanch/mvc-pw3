@@ -1,7 +1,8 @@
 <?php
   include_once('controller/Usuario_controller.php');
 
-  var_dump(isset($_SESSION['captcha']));
+  $first = rand(1, 20);
+  $second = rand(1, 20);
 ?>
 
 <!doctype html>
@@ -31,8 +32,9 @@
             <div class="card-header"><h3>Você fez muitas tentativas!</h3></div>
             <div class="card-body">
               <form action="?acao=confirmar_captcha" method="POST">
-                <label for="id-calculo">Qual é o resultado de <?php echo rand(1, 20) . ' + ' . rand(1, 20); ?>?</label>
-                <input class="form-control" type="text" name="calculo" id="id-calculo" required />
+                <input type="hidden" name="resultado" value="<?php echo $first + $second; ?>" />
+                <label for="id-calculo">Qual é o resultado de <?php echo $first . ' + ' . $second; ?>?</label>
+                <input class="form-control" type="text" name="tentativa" id="id-calculo" required />
                 <br/><br/>
                 <input type="submit" class="btn btn-info" id="id-confirmar" value="Confirmar" />
               </form>

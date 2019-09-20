@@ -4,9 +4,15 @@ include_once('controller/Categoria_controller.php');
 include_once('controller/Usuario_controller.php');
 
 if(!isset($_SESSION['cod_logado'])) {
-  echo "<script>
+    echo "<script>
 			window.location.href = 'login.php';
-		</script>";
+        </script>";
+}
+if ($_SESSION['nivel_logado'] == 2) {
+    echo "<script>
+            alert('Acesso Proibido!');
+            window.location.href = 'index.php';
+        </script>";
 }
 ?>
 

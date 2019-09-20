@@ -1,7 +1,5 @@
 <?php
   include_once('controller/Usuario_controller.php');
-
-  session_start();
   if(isset($_SESSION['captcha'])){
     echo "<script>
             window.location.href = 'captcha.php';
