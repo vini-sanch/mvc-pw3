@@ -1,14 +1,9 @@
 <?php
   session_start();
   include_once('controller/Categoria_controller.php');
+  include_once('controller/Usuario_controller.php');
 
-  if(!isset($_SESSION['cod_logado'])) {
-    echo "<script>
-              window.location.href = 'login.php';
-		  </script>";
-  }
-
-  $acesso = $_SESSION['nivel_logado'];
+  $auth = autenticar();
 ?>
 
 <!doctype html>
@@ -49,9 +44,11 @@
 							<th scope="col">
 								<h5>Categoria</h5>
 							</th>
-							<th scope="col">
-								<h5>Ação</h5>
-							</th>
+							<?php if($auth): ?>
+								<th scope="col">
+									<h5>Ação</h5>
+								</th>
+							<?php endif; ?>
 						</tr>
 					</thead>
 					<tbody>
@@ -59,12 +56,12 @@
 						<tr>
 							<td><?php echo $value->__get('cod_categoria'); ?></td>
 							<td><?php echo $value->__get('nome_categoria'); ?></td>
-							<td>
-								<?php if($acesso != 2): ?>
+							<?php if($auth): ?>
+								<td>
 									<a class='btn btn-outline-danger' onclick="confirma()" href="?codcategoria=<?php echo $value->__get('codcategoria'); ?>&acao=excluir_cat">Excluir</a>
 									<a class='btn btn-outline-warning' href="atu_categoria.php?codcategoria=<?php echo $value->__get('codcategoria'); ?>&acao=dados_cat">Editar</a>
-								<?php endif; ?>
-							</td>
+								</td>
+							<?php endif; ?>
 						</tr>
 						<?php endforeach; ?>
 					</tbody>

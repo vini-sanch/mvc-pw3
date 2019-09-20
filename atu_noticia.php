@@ -3,10 +3,13 @@ session_start();
 include_once('controller/Noticia_controller.php');
 include_once('controller/Usuario_controller.php');
 
-if(!isset($_SESSION['cod_logado'])) {
+$auth = autenticar();
+
+if(!$auth) {
   echo "<script>
-			window.location.href = 'login.php';
-		</script>";
+      alert('Acesso Proibido!');
+      window.location.href = 'index.php';
+  </script>";
 }
 ?>
 

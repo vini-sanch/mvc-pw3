@@ -98,6 +98,26 @@
         }
     }
 
+    function autenticar($tipo = true)
+    {
+        $usuario = $_SESSION['cod_logado'];
+
+        if(!isset($usuario)) {
+            echo "<script>
+                window.location.href = 'login.php';
+            </script>";
+        }
+
+        if($tipo) {
+            if($_SESSION['nivel_logado'] == 2) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+    }
+
     function valida_tentativa() {
         session_start();
         $numero_tentativas = $_SESSION['num_try'];

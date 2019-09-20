@@ -72,6 +72,7 @@
 		public function consultar()
 		{
 			$sql_cmd = "SELECT * FROM NOTICIA";
+
 			$exec = $this->conn->prepare($sql_cmd);
 			$exec->execute();
 			$dados = [];
