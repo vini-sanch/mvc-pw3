@@ -43,8 +43,11 @@ $acesso = $_SESSION['nivel_logado'];
   <?php endif; ?>
   <a href="cons_categoria.php" class="btn btn-outline-info">Consultar Categoria</a>
   <br /><br />
+  <?php if ($acesso == 1) : ?>
+  <br /><br />
   <a href="cad_noticia.php" class="btn btn-outline-warning">Cadastrar Notícia</a>
   <br /><br />
+  <?php endif; ?>
   <a href="cons_noticia.php" class="btn btn-outline-warning">Consultar Notícia</a>
   <br /><br />
   <a href="login.php?acao=sair" class="btn btn-outline-danger">Sair</a>

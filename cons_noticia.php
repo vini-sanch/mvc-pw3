@@ -1,14 +1,10 @@
 <?php
 session_start();
-include_once('controller/Noticia_controller.php');
-include_once('controller/Categoria_controller.php');
-include_once('controller/Usuario_controller.php');
+	include_once('controller/Noticia_controller.php');
+	include_once('controller/Categoria_controller.php');
+	include_once('controller/Usuario_controller.php');
 
-if(!isset($_SESSION['cod_logado'])) {
-  echo "<script>
-			window.location.href = 'login.php';
-		</script>";
-}
+	$auth = autenticar();
 ?>
 <!doctype html>
 <html lang="en">
@@ -50,6 +46,11 @@ if(!isset($_SESSION['cod_logado'])) {
 							<p class="card-text">Data: <?php echo $valor->__get('data'); ?></p>
 							<p class="card-text">Imagem: <?php echo $valor->__get('imagem'); ?></p>
 							<p class="card-text"><?php echo $valor->__get('conteudo'); ?></p>
+							<br/>
+							<?php if($auth): ?>
+								<a class='btn btn-danger' onclick="confirma()" >Excluir</a>
+								<a class='btn btn-warning' >Editar</a>
+							<?php endif; ?>
 						</div>
 					</div>
 					<br/><br/>

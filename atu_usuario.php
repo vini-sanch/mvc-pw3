@@ -2,16 +2,13 @@
 session_start();
 include_once('controller/Usuario_controller.php');
 
-if(!isset($_SESSION['cod_logado'])) {
+$auth = autenticar();
+
+if(!$auth) {
   echo "<script>
-			window.location.href = 'login.php';
-		</script>";
-}
-if ($_SESSION['nivel_logado'] == 2) {
-    echo "<script>
-            alert('Acesso Proibido!');
-            window.location.href = 'index.php';
-        </script>";
+      alert('Acesso Proibido!');
+      window.location.href = 'index.php';
+  </script>";
 }
 ?>
 
@@ -35,6 +32,7 @@ if ($_SESSION['nivel_logado'] == 2) {
 </head>
 
 <body>
+        
     <br>
     <a href="cons_usuario.php" class="btn btn-outline-success">Voltar</a>
     <br /><br />
