@@ -3,6 +3,7 @@
 include_once('model/Noticia_model.php');
 
 $noticia = new Noticia_model();
+$noticias = [];
 
 if (isset($_REQUEST['acao'])) {
 	switch ($_REQUEST['acao']) {
@@ -13,7 +14,7 @@ if (isset($_REQUEST['acao'])) {
 
 			// código para upload de arquivo
 			$nome_arquivo = $_FILES['imagem']['name'];
-			$destino = "../imagens/$nome_arquivo";
+			$destino = "imagens/$nome_arquivo";
 			$nome_tmp = $_FILES['imagem']['tmp_name'];
 
 			move_uploaded_file($nome_tmp, $destino);
@@ -55,10 +56,17 @@ if (isset($_REQUEST['acao'])) {
 		break;
 
 		case 'dados_not':
-		$noticia->__set('cod_noticia', $_GET['codnoticia']);
-		// preenche o objeto com dados de retorno
-		$noticia = $noticia->retornarDados();
+			$noticia->__set('cod_noticia', $_GET['codnoticia']);
+			// preenche o objeto com dados de retorno
+			$noticia = $noticia->retornarDados();
+		break;
+
+		case 'filtrar':
+			$noticias = $noticia->consultar($_GET['codcategoria']);
 		break;
 	}
+}
+else {
+	$noticias = $noticia->consultar();
 }
 ?>

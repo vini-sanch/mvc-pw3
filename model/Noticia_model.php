@@ -69,13 +69,21 @@
 		}
 
 		// consulta de notícia
-		public function consultar()
+		public function consultar($conteudo = null)
 		{
-			$sql_cmd = "SELECT * FROM NOTICIA";
-
-			$exec = $this->conn->prepare($sql_cmd);
-			$exec->execute();
 			$dados = [];
+
+			if(isset($conteudo)) {
+				$sql_cmd = "SELECT * FROM NOTICIA WHERE CODCATEGORIA = ?";
+				$exec = $this->conn->prepare($sql_cmd);
+				$exec->execute([$conteudo]);
+			}
+			else {
+				$sql_cmd = "SELECT * FROM NOTICIA";
+				$exec = $this->conn->prepare($sql_cmd);
+				$exec->execute();
+			}
+			
 			foreach ($exec->fetchAll() as $row) {
 				$noticia = new Noticia_model();
 				$noticia->__set('cod_noticia', $row['CODNOTICIA']);

@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    padding: 5%;
+}
+
+.pai {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-areas: "menu grid grid grid grid grid";
+}
+
+.grid-noticias {
+    grid-area: grid;
+}
+
+.menu-categorias {
+    background-color: black;
+    grid-area: menu;
+}

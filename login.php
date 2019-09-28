@@ -28,6 +28,20 @@
 
 <body style="background: #05041A;">
     <div class="container-fluid">
+    <div class="row">
+            <div class="col-lg-12">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link btn btn-outline-warning" href="pag_noticias.php">JORNAL</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="login.php">Entrar</a>
+                    </li>
+                </ul>
+                <br/>
+                <br/>
+            </div>
+        </div>
       <div class="row">
         <div class="col-12 center">
           <div class="card bg-light center mb-3" style="max-width: 18rem;">

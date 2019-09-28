@@ -43,29 +43,40 @@
             $exec->execute($this->cod_categoria);
         }
 
+        public function num_noticias()
+		{
+            // declarando o array de retorno
+            $dados = [];
+            $sql_cmd = "SELECT COUNT(CODNOTICIA) AS TOTAL FROM noticia WHERE CODCATEGORIA = ?";
+            $exec = $this->conn->prepare($sql_cmd);
+            $exec->execute([$this->cod_categoria]);
+
+            $numero = $exec->fetch();
+
+            return $numero['TOTAL'];
+		}
+
         // consulta de categoria
         public function consultar(array $condicao = null)
         {
+            // declarando o array de retorno
+            $dados = [];
+
             if(isset($condicao)) {
                 // executando o comando
-                $sql_cmd = "SELECT * FROM CATEGORIA WHERE CODCATEGORIA = ?";
+                $sql_cmd = "SELECT * FROM categoria WHERE CODCATEGORIA = ?";
                 $exec = $this->conn->prepare($sql_cmd);
                 $exec->execute($condicao);
             }
             else {
-                // executando o comando
-                $sql_cmd = "SELECT * FROM CATEGORIA";
+                $sql_cmd = "SELECT * FROM categoria";
                 $exec = $this->conn->prepare($sql_cmd);
                 $exec->execute();
             }
 
-
-            // declarando o array de retorno
-            $dados = [];
-
             //executando o comando
             foreach($exec->fetchAll() as $row) {
-               // instância para armazenar os objetos na array
+                // instância para armazenar os objetos na array
                 $categoria = new Categoria_model();
                 $categoria->__set('cod_categoria', $row['CODCATEGORIA']);
                 $categoria->__set('nome_categoria', $row['NOMECATEGORIA']);

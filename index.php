@@ -4,7 +4,7 @@ include_once('controller/Usuario_controller.php');
 
 if (!isset($_SESSION['cod_logado'])) {
   echo "<script>
-              window.location.href = 'login.php';
+              window.location.href = 'pag_noticias.php';
 		  </script>";
 }
 
