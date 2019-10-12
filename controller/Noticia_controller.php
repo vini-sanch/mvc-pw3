@@ -2,8 +2,12 @@
 //incluindo o modelo de Usuário com funções CRUD
 include_once('model/Noticia_model.php');
 
+define('QTD_PAG', 2);
+
 $noticia = new Noticia_model();
 $noticias = [];
+
+$inicio = isset($_GET['indice']) ? $_GET['indice'] * QTD_PAG : 0;
 
 if (isset($_REQUEST['acao'])) {
 	switch ($_REQUEST['acao']) {
@@ -62,11 +66,13 @@ if (isset($_REQUEST['acao'])) {
 		break;
 
 		case 'filtrar':
-			$noticias = $noticia->consultar($_GET['codcategoria']);
+		$total_paginas = ceil(count($noticia->consultar($_GET['codcategoria'])) / QTD_PAG);
+			$noticias = $noticia->consultarLimit($inicio, QTD_PAG, $_GET['codcategoria']);
 		break;
 	}
 }
 else {
-	$noticias = $noticia->consultar();
+	$total_paginas = ceil(count($noticia->consultar()) / QTD_PAG);
+	$noticias = $noticia->consultarLimit($inicio, QTD_PAG);
 }
 ?>

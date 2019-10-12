@@ -1,8 +1,7 @@
 <?php
-session_start();
+    session_start();
 	include_once('controller/Noticia_controller.php');
     include_once('controller/Categoria_controller.php');
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -25,7 +24,7 @@ session_start();
     </style>
 </head>
 
-<body>
+<body style="background: #05041A;">
 	<div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -67,11 +66,34 @@ session_start();
                             <img class="card-img-top" src="imagens/<?php echo $not->__get('imagem'); ?>">
                                 <div class="card-body">
                                     <h5 class="card-title"><?php echo $not->__get('titulo'); ?></h5>
-                                    <p class="card-text"><?php echo $not->__get('conteudo'); ?></p>
+                                    <p class="card-text">Autor: <?php echo $not->__get('autor'); ?></p>
+                                    <p class="card-text">
+                                        <?php 
+                                            $data = explode('-', $not->__get('data'));
+                                            echo implode('/', array_reverse($data)); 
+                                        ?>
+                                    </p>
+                                    <p class="card-text">
+                                        <a href="carregar_pag.php?cod_noticia=<?php echo $not->__get('cod_noticia'); ?>">Ver Mais</a>
+                                    </p>
                                 </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <?php
+                        echo "<br/>";
+                        echo "<nav aria-label='Navegação de página exemplo'><ul class='pagination'>";
+                
+                        for($i = 1; $i <= $total_paginas; $i++) {
+                            echo "<li class='page-item'><a class='page-link' href='?indice=" . ($i - 1) . "'>$i</a></li>";
+                        }
+                
+                        echo "</ul></nav>";
+                ?>
             </div>
         </div>
     </div>

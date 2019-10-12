@@ -97,5 +97,35 @@
 			}
 			return $dados;
 		}
+
+		// consulta de notícia
+		public function consultarLimit($inicio, $quantidade, $conteudo = null)
+		{
+			$dados = [];
+
+			if(isset($conteudo)) {
+				$sql_cmd = "SELECT * FROM NOTICIA WHERE CODCATEGORIA = ? LIMIT $inicio, $quantidade";
+				$exec = $this->conn->prepare($sql_cmd);
+				$exec->execute([$conteudo]);
+			}
+			else {
+				$sql_cmd = "SELECT * FROM NOTICIA LIMIT $inicio, $quantidade";
+				$exec = $this->conn->prepare($sql_cmd);
+				$exec->execute();
+			}
+			
+			foreach ($exec->fetchAll() as $row) {
+				$noticia = new Noticia_model();
+				$noticia->__set('cod_noticia', $row['CODNOTICIA']);
+				$noticia->__set('titulo', $row['TITULO']);
+				$noticia->__set('conteudo', $row['CONTEUDO']);
+				$noticia->__set('data', $row['DATA']);
+				$noticia->__set('autor', $row['AUTOR']);
+				$noticia->__set('imagem', $row['IMAGEM']);
+				$noticia->__set('cod_categoria', $row['CODCATEGORIA']);
+				$dados[] = $noticia;
+			}
+			return $dados;
+		}
 	}
 ?>
