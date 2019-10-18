@@ -48,7 +48,7 @@
 		{
 			$sql_cmd = "DELETE FROM NOTICIA WHERE CODNOTICIA = ?";
 			$exec = $this->conn->prepare($sql_cmd);
-			$exec->execute($this->cod_noticia);
+			$exec->execute([$this->cod_noticia]);
 		}
 
 		// atualiza notícia
@@ -67,6 +67,29 @@
 			];
 			$exec->execute($valores);
 		}
+
+	// consulta de uma notícia
+	public function retornarDados()
+	{
+		$dados = [];
+
+		$sql_cmd = "SELECT * FROM NOTICIA WHERE CODNOTICIA = ?";
+		$exec = $this->conn->prepare($sql_cmd);
+		$exec->execute([$this->cod_noticia]);
+
+		$row = $exec->fetch();
+
+		$noticia = new Noticia_model();
+		$noticia->__set('cod_noticia', $row['CODNOTICIA']);
+		$noticia->__set('titulo', $row['TITULO']);
+		$noticia->__set('conteudo', $row['CONTEUDO']);
+		$noticia->__set('data', $row['DATA']);
+		$noticia->__set('autor', $row['AUTOR']);
+		$noticia->__set('imagem', $row['IMAGEM']);
+		$noticia->__set('cod_categoria', $row['CODCATEGORIA']);
+
+		return $noticia;
+	}
 
 		// consulta de notícia
 		public function consultar($conteudo = null)

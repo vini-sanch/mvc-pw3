@@ -2,7 +2,7 @@
 //incluindo o modelo de Usuário com funções CRUD
 include_once('model/Noticia_model.php');
 
-define('QTD_PAG', 2);
+define('QTD_PAG', 3);
 
 $noticia = new Noticia_model();
 $noticias = [];
@@ -43,6 +43,19 @@ if (isset($_REQUEST['acao'])) {
 		break;
 
 		case 'atualizar_not':
+			$imagem_old = $_POST['imagem_old'];
+			$imagem_new = isset($_FILES['imagem']) ? $_FILES['imagem']['name'] : "";
+
+			if(empty($imagem_new)) $noticia->__set('imagem', $imagem_old);
+			else {
+				$destino = 'imagens/' . $imagem_new;
+				$nome_tmp = $_FILES['imagem']['tmp_name'];
+
+				move_uploaded_file($nome_tmp, $destino);
+				unlink('imagens/' . $imagem_old);
+
+				$noticia->__set('imagem', $imagem_new);
+			}
 			// passando os dados para o objeto
 			$noticia->__set('titulo', $_POST['titulo']);
 			$noticia->__set('autor', $_POST['autor']);
@@ -66,7 +79,7 @@ if (isset($_REQUEST['acao'])) {
 		break;
 
 		case 'filtrar':
-		$total_paginas = ceil(count($noticia->consultar($_GET['codcategoria'])) / QTD_PAG);
+			$total_paginas = ceil(count($noticia->consultar($_GET['codcategoria'])) / QTD_PAG);
 			$noticias = $noticia->consultarLimit($inicio, QTD_PAG, $_GET['codcategoria']);
 		break;
 	}

@@ -40,7 +40,7 @@
         {
             $sql_cmd = "DELETE FROM CATEGORIA WHERE CODCATEGORIA = ?";
             $exec = $this->conn->prepare($sql_cmd);
-            $exec->execute($this->cod_categoria);
+            $exec->execute([$this->cod_categoria]);
         }
 
         public function num_noticias()
@@ -54,7 +54,24 @@
             $numero = $exec->fetch();
 
             return $numero['TOTAL'];
-		}
+        }
+
+        // consulta de categoria
+        public function retornarDados()
+        {
+            // executando o comando
+            $sql_cmd = "SELECT * FROM categoria WHERE CODCATEGORIA = ?";
+            $exec = $this->conn->prepare($sql_cmd);
+            $exec->execute([$this->cod_categoria]);
+
+            $row = $exec->fetch();
+            
+            $categoria = new Categoria_model();
+            $categoria->__set('cod_categoria', $row['CODCATEGORIA']);
+            $categoria->__set('nome_categoria', $row['NOMECATEGORIA']);
+
+            return $categoria;
+        }
 
         // consulta de categoria
         public function consultar(array $condicao = null)

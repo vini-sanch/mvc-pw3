@@ -54,7 +54,6 @@ if(!$auth) {
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-12">
-                        <!-- <button type="submit" class="btn btn-primary">Cadastrar</button> -->
                         <input type="submit" class="btn btn-primary" value="Atualizar">
                     </div>
                 </div>

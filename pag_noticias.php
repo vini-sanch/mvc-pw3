@@ -89,7 +89,9 @@
                         echo "<nav aria-label='Navegação de página exemplo'><ul class='pagination'>";
                 
                         for($i = 1; $i <= $total_paginas; $i++) {
-                            echo "<li class='page-item'><a class='page-link' href='?indice=" . ($i - 1) . "'>$i</a></li>";
+                            $acao = isset($_GET['acao']) && isset($_GET['codcategoria']) ? 'acao='. $_GET['acao']. '&codcategoria=' . $_GET['codcategoria'] : ''; 
+
+                            echo "<li class='page-item'><a class='page-link' href='?". $acao ."&indice=" . ($i - 1) . "'>$i</a></li>";
                         }
                 
                         echo "</ul></nav>";

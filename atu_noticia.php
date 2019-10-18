@@ -1,12 +1,13 @@
 <?php
 session_start();
 include_once('controller/Noticia_controller.php');
+include_once('controller/Categoria_controller.php');
 include_once('controller/Usuario_controller.php');
 
 $auth = autenticar();
 
-if(!$auth) {
-  echo "<script>
+if (!$auth) {
+    echo "<script>
       alert('Acesso Proibido!');
       window.location.href = 'index.php';
   </script>";
@@ -19,8 +20,8 @@ if(!$auth) {
 <head>
     <title>Title</title>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <style>
         body {
             padding: 5%;
@@ -37,19 +38,19 @@ if(!$auth) {
     <a href="cons_noticia.php" class="btn btn-outline-success">Voltar</a>
     <br /><br />
     <div class="container">
-        <form method="POST" action="?acao=atualizar_not">
+        <form method="POST" enctype="multipart/form-data" action="?acao=atualizar_not">
             <fieldset>
                 <legend>Atualizar Notícia</legend>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
                         <label for="id-noticia" class="col-sm-1-12 col-form-label">Código da Notícia:</label><br />
-                        <input type="text" class="form-control" name="codnoticia" id="id-noticia" value="<?php echo $noticia->__get('cod_noticia'); ?>"  required readonly />
+                        <input type="text" class="form-control" name="codnoticia" id="id-noticia" value="<?php echo $noticia->__get('cod_noticia'); ?>" required readonly />
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
                         <label for="id-titulo" class="col-sm-1-12 col-form-label">Título:</label><br />
-                        <input type="text" maxlength="50" class="form-control" name="titulo"  id="id-titulo" value="<?php echo $noticia->__get('titulo'); ?>" required placeholder="Exemplo: Harry Potter" />
+                        <input type="text" maxlength="50" class="form-control" name="titulo" id="id-titulo" value="<?php echo $noticia->__get('titulo'); ?>" required placeholder="Exemplo: Harry Potter" />
                     </div>
                 </div>
                 <div class="form-group row">
@@ -67,17 +68,25 @@ if(!$auth) {
                 <div class="form-group row">
                     <div class="col-sm-4-12">
                         <label for="id-categoria" class="col-sm-1-12 col-form-label">Categoria:</label><br />
-                        <select required name="categoria" id="id-categoria">
-                            <?php foreach($categoria->consultar() as $row): ?>
-                                <option value="<?php echo $row->__get('cod_categoria'); ?>" <?php echo ($noticia->__get('cod_categoria') == $row->__get('cod_categoria')) ? 'selected' : null; ?> ><?php echo $row->__get('nome_categoria'); ?></option>
+                        <select required name="categoria" class="form-control" id="id-categoria">
+                            <?php foreach ($categoria->consultar() as $row) : ?>
+                                <option value="<?php echo $row->__get('cod_categoria'); ?>" <?php echo ($noticia->__get('cod_categoria') == $row->__get('cod_categoria')) ? 'selected' : null; ?>><?php echo $row->__get('nome_categoria'); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
+                        <label class="form-label" for="id-imagem">Imagem:</label>
+                        <img class="img-responsive" style="max-width:250px;" src="imagens/<?php echo $noticia->__get('imagem'); ?>" alt="Imagem da Notícia" /><br />
+                        <input type="hidden" name="imagem_old" value="<?php echo $noticia->__get('imagem'); ?>" />
+                        <input type="file" accept="image/*" class="form-control" name="imagem" id="id-imagem" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-4-12">
                         <label for="id-categoria" class="col-sm-1-12 col-form-label">Conteúdo:</label><br />
-                        <textarea name="conteudo" id="id-conteudo" cols="30" rows="10"><?php echo $noticia->__get('conteudo'); ?></textarea>
+                        <textarea name="conteudo" class="form-control" id="id-conteudo" cols="30" rows="10"><?php echo $noticia->__get('conteudo'); ?></textarea>
                     </div>
                 </div>
                 <div class="form-group row">

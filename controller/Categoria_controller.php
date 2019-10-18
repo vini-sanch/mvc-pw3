@@ -26,7 +26,7 @@
 
             case 'atualizar_cat':
                 // passando os dados para o objeto
-                $categoria->__set('nome_categoria', $_POST['categoria']);
+                $categoria->__set('nome_categoria', $_POST['nomecategoria']);
                 $categoria->__set('cod_categoria', $_POST['codcategoria']);
                 // executando o método cadastrar
                 $categoria->atualizar();

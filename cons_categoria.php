@@ -25,7 +25,7 @@
 
 <body>
 	<br>
-	<a href="index.php" class="btn btn-outline-success">3</a>
+	<a href="index.php" class="btn btn-outline-success">Voltar</a>
 	<br /><br />
 	<div class="container">
 		<div class="row">
@@ -58,8 +58,8 @@
 							<td><?php echo $value->__get('nome_categoria'); ?></td>
 							<?php if($auth): ?>
 								<td>
-									<a class='btn btn-outline-danger' onclick="confirma()" href="?codcategoria=<?php echo $value->__get('codcategoria'); ?>&acao=excluir_cat">Excluir</a>
-									<a class='btn btn-outline-warning' href="atu_categoria.php?codcategoria=<?php echo $value->__get('codcategoria'); ?>&acao=dados_cat">Editar</a>
+									<a class='btn btn-outline-danger' onclick="confirma()" href="?codcategoria=<?php echo $value->__get('cod_categoria'); ?>&acao=excluir_cat">Excluir</a>
+									<a class='btn btn-outline-warning' href="atu_categoria.php?codcategoria=<?php echo $value->__get('cod_categoria'); ?>&acao=dados_cat">Editar</a>
 								</td>
 							<?php endif; ?>
 						</tr>
