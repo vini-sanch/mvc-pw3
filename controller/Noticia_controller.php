@@ -18,8 +18,8 @@ if (isset($_REQUEST['acao'])) {
 
 			// código para upload de arquivo
 			$nome_arquivo = $_FILES['imagem']['name'];
-			$destino = "imagens/$nome_arquivo";
 			$nome_tmp = $_FILES['imagem']['tmp_name'];
+			$destino = "imagens/$nome_arquivo";
 
 			move_uploaded_file($nome_tmp, $destino);
 
@@ -48,11 +48,12 @@ if (isset($_REQUEST['acao'])) {
 
 			if(empty($imagem_new)) $noticia->__set('imagem', $imagem_old);
 			else {
+				if(!empty($imagem_old)) unlink('imagens/' . $imagem_old);
+				$imagem_new  = 'u' . $_POST['codnoticia'] . $imagem_new;
 				$destino = 'imagens/' . $imagem_new;
 				$nome_tmp = $_FILES['imagem']['tmp_name'];
 
 				move_uploaded_file($nome_tmp, $destino);
-				unlink('imagens/' . $imagem_old);
 
 				$noticia->__set('imagem', $imagem_new);
 			}

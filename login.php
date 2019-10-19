@@ -1,5 +1,6 @@
 <?php
   include_once('controller/Usuario_controller.php');
+  include_once('controller/Contato_controller.php');
   if(isset($_SESSION['captcha'])){
     echo "<script>
             window.location.href = 'captcha.php';
@@ -42,6 +43,7 @@
                 <br/>
             </div>
         </div>
+      <?php if(isset($_GET['acao'])): ?>
       <div class="row">
         <div class="col-12 center">
           <div class="card bg-light center mb-3" style="max-width: 18rem;">
@@ -54,12 +56,31 @@
                 <input class="form-control" type="password" name="senha" id="id-senha" required />
                 <a href="cad_usuario.php">Cadastrar Usuário</a>
                 <br/><br/>
+                <a href="?acao=ask_email">Esqueceu a Senha?</a>
+                <br/><br/>
                 <input type="submit" class="btn btn-info" id="id-entrar" value="Entrar" />
               </form>
             </div>
           </div>
         </div>
       </div>
+
+      <?php elseif($_GET['acao'] == 'ask_email'): ?>
+        <div class="row">
+          <div class="col-12 center">
+            <div class="card bg-light center mb-3" style="max-width: 18rem;">
+              <div class="card-header"><h3>Login</h3></div>
+              <div class="card-body">
+                <form action="?acao=enviar_email" method="POST">
+                  <label for="id-email">Digite o Seu E-mail Cadastrado: </label>
+                  <input class="form-control" type="email" name="email" id="id-email" required />
+                  <input type="submit" class="btn btn-info" id="id-entrar" value="Enviar" />
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+    <?php endif; ?>
     </div>
 </body>
 

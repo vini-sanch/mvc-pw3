@@ -6,6 +6,7 @@
         private $nome;
         private $email;
         private $senha;
+        private $token;
         private $nivel_acesso;
 
         //conexão
@@ -98,7 +99,7 @@
         {
             // comando de atualização da tabela usuário
             $sql_cmd = 'UPDATE usuario 
-                        SET NOME = ?, EMAIL = ?, SENHA = ?, NIVEL_ACESSO = ? 
+                        SET NOME = ?, EMAIL = ?, SENHA = ?, NIVEL_ACESSO = ?, TOKEN = ?
                         WHERE CODUSUARIO = ?';
             
             $exec = $this->conn->prepare($sql_cmd);
@@ -109,6 +110,7 @@
                 $this->email,
                 sha1($this->senha),
                 $this->nivel_acesso,
+                $this->token,
                 $this->codusuario
             ];
             //executando
@@ -116,13 +118,19 @@
         }
 
         // método de retorno de um usuário apenas
-        public function retornarDados()
+        public function retornarDados($email = null)
         {
-            $sql_cmd = 'SELECT * FROM usuario WHERE CODUSUARIO = ?';
-            $valor = [$this->codusuario];
+            if(empty($email)) {
+                $sql_cmd = 'SELECT * FROM usuario WHERE CODUSUARIO = ?';
+                $valor = [$this->codusuario];
+            }
+            else {
+                $sql_cmd = 'SELECT * FROM usuario WHERE EMAIL = ?';
+                $valor = [$email];
+            }
+
             $exec = $this->conn->prepare($sql_cmd);
             $exec->execute($valor);
-            
             $row = $exec->fetch();
             
             $user = new Usuario_model();

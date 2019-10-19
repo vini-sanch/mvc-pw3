@@ -77,10 +77,10 @@ if (!$auth) {
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-4-12">
-                        <label class="form-label" for="id-imagem">Imagem:</label>
-                        <img class="img-responsive" style="max-width:250px;" src="imagens/<?php echo $noticia->__get('imagem'); ?>" alt="Imagem da Notícia" /><br />
+                        <label class="form-label" for="id-imagem">Imagem:</label><br/>
+                        <img class="img-responsive" style="max-width:250px;" src="imagens/<?php echo $noticia->__get('imagem'); ?>" alt="Imagem da Notícia" /><br /><br/>
                         <input type="hidden" name="imagem_old" value="<?php echo $noticia->__get('imagem'); ?>" />
-                        <input type="file" accept="image/*" class="form-control" name="imagem" id="id-imagem" />
+                        <input type="file" maxlength="90" accept="image/*" class="form-control" name="imagem" id="id-imagem" />
                     </div>
                 </div>
                 <div class="form-group row">
