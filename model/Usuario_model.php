@@ -94,6 +94,24 @@
             $exec->execute($valores);
         }
 
+        public function atualizarToken()
+        {
+            // comando de atualização da tabela usuário
+            $sql_cmd = 'UPDATE usuario 
+                            SET TOKEN = ?
+                            WHERE EMAIL = ?';
+
+            $exec = $this->conn->prepare($sql_cmd);
+
+            // passando os atributos como parâmetros
+            $valores = [
+                $this->token,
+                $this->email
+            ];
+            //executando
+            $exec->execute($valores);
+        }
+
         // método atualizar
         public function atualizar()
         {
@@ -138,6 +156,7 @@
             $user->nome = $row['NOME'];
             $user->email = $row['EMAIL'];
             $user->senha = $row['SENHA'];
+            $user->token = $row['TOKEN'];
             $user->nivel_acesso = $row['NIVEL_ACESSO'];
             
             return $user;
