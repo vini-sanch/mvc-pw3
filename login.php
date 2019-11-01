@@ -21,6 +21,10 @@ if (isset($_SESSION['captcha'])) {
     body {
       padding: 5%;
     }
+
+    .nav-item {
+      margin: .5rem;
+    }
   </style>
 
   <!-- Bootstrap CSS -->
@@ -34,6 +38,9 @@ if (isset($_SESSION['captcha'])) {
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link btn btn-outline-warning" href="pag_noticias.php">JORNAL</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link btn btn-outline-success" href="contato.php">Contato</a>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="login.php">Entrar</a>
